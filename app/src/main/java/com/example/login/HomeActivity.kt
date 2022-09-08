@@ -1,53 +1,43 @@
 package com.example.login
 
-import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import androidx.appcompat.app.AlertDialog
+import android.util.Log
+import android.widget.ImageView
+import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.lang.Exception
 
 class HomeActivity : AppCompatActivity() {
+
+    lateinit var bottomNav : BottomNavigationView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
-        setTitle("IKP Travel")
-
-        changeFragment(FragmentTravel())
-    }
-
-    fun changeFragment(fragment: Fragment?) {
-        if (fragment != null) {
-            getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.layout_fragment, fragment)
-                .commit()
+        loadFragment(FragmentTravel())
+        bottomNav = findViewById(R.id.bottomNav) as BottomNavigationView
+        bottomNav.setOnNavigationItemReselectedListener {
+            when (it.itemId) {
+                R.id.menu_travel -> {
+                    loadFragment(FragmentTravel())
+                    return@setOnNavigationItemReselectedListener
+                }
+                R.id.menu_exit -> {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                }
+            }
         }
     }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val menuInflater = MenuInflater(this)
-        menuInflater.inflate(R.menu.home_menu, menu)
-        return true
+    private  fun loadFragment(fragment: Fragment){
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.container,fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        if (item.itemId == R.id.menu_travel) {
-            changeFragment(FragmentTravel())
-        } else {
-            val builder: AlertDialog.Builder = AlertDialog.Builder(this@HomeActivity)
-            builder.setMessage("Are you sure want to exit?")
-                .setPositiveButton("YES", object : DialogInterface.OnClickListener {
-                    override fun onClick(dialogInterface: DialogInterface, i: Int) {
-                        finishAndRemoveTask()
-                    }
-                })
-                .show()
-        }
-        return super.onOptionsItemSelected(item)
-    }
 }
