@@ -14,7 +14,7 @@ class Register : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        setTitle("Register")
+        setTitle("")
 
         username = findViewById(R.id.etUsername)
         password = findViewById(R.id.etPassword)

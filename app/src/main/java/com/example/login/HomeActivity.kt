@@ -26,6 +26,10 @@ class HomeActivity : AppCompatActivity() {
                     loadFragment(FragmentTravel())
                     return@setOnNavigationItemReselectedListener
                 }
+                R.id.riwayat -> {
+                    loadFragment(FragmentRiwayat())
+                    return@setOnNavigationItemReselectedListener
+                }
                 R.id.menu_exit -> {
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
