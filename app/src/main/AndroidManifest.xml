@@ -17,16 +17,10 @@
             android:name=".ShowFamily"
             android:exported="false" />
         <activity
-            android:name=".FamilyAdapter"
-            android:exported="false" />
-        <activity
             android:name=".EditFamily"
             android:exported="false" />
         <activity
             android:name=".EditActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ShowUserAdapter"
             android:exported="false" />
         <activity
             android:name=".ShowUser"
@@ -39,7 +33,11 @@
             android:exported="false" />
         <activity
             android:name=".Register"
-            android:exported="true">
+            android:exported="false"/>
+        <activity
+            android:name=".SplashScreen"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
