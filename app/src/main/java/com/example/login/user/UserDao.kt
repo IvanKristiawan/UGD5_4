@@ -12,6 +12,6 @@ interface UserDao {
     suspend fun deleteNote(note: User)
     @Query("SELECT * FROM user")
     suspend fun getNotes() : List<User>
-    @Query("SELECT * FROM user WHERE username =:username_id")
-    suspend fun getNote(username_id: String) : List<User>
+    @Query("SELECT * FROM user WHERE id =:username_id")
+    suspend fun getNote(username_id: Int) : List<User>
 }

@@ -1,22 +1,32 @@
 package com.example.login
 
-import androidx.appcompat.app.AppCompatActivity
-import android.app.AlertDialog
-import android.content.DialogInterface
-import android.content.Intent
-import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.login.user.Constant
-import com.example.login.user.User
-import com.example.login.user.UserDB
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import android.widget.TextView
+import com.example.login.entity.Dosen
+import com.example.login.entity.Riwayat
+import com.example.login.entity.Travel
 
-class RVRiwayatAdapter : AppCompatActivity() {
+class RVRiwayatAdapter(private val data: Array<Riwayat>) : RecyclerView.Adapter<RVRiwayatAdapter.viewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RVRiwayatAdapter.viewHolder {
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.rv_item_riwayat, parent, false)
+        return RVRiwayatAdapter.viewHolder(itemView)
+    }
 
+    override fun onBindViewHolder(holder: viewHolder, position: Int){
+        val currentItem = data[position]
+        holder.tvNamaDosen.text = currentItem.date
+        holder.tvDetailDosen.text = currentItem.name
+    }
+
+    override fun getItemCount(): Int {
+        return data.size
+    }
+
+    class viewHolder(itemView : View) :  RecyclerView.ViewHolder(itemView){
+        val tvNamaDosen : TextView = itemView.findViewById(R.id.tv_nama_dosen)
+        val tvDetailDosen : TextView = itemView.findViewById(R.id.tv_details_dosen)
+    }
 }

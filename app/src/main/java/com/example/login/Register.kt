@@ -51,7 +51,7 @@ class Register : AppCompatActivity() {
 
             CoroutineScope(Dispatchers.IO).launch {
                 db.noteDao().addNote(
-                    User(1, username.text.toString(),
+                    User((Math.random() * (10000 - 100 + 1)).toInt(), username.text.toString(),
                         password.text.toString())
                 )
                 finish()
