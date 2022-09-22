@@ -6,39 +6,41 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.login.user.Constant
-import com.example.login.user.User
-import com.example.login.user.UserDB
-import kotlinx.android.synthetic.main.activity_show_user.*
+import com.example.login.family.Constant
+import com.example.login.family.Family
+import com.example.login.family.FamilyDB
+import kotlinx.android.synthetic.main.activity_show_family.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ShowUser : AppCompatActivity() {
-    val db by lazy { UserDB(this) }
-    lateinit var noteAdapter: ShowUserAdapter
+class ShowFamily : AppCompatActivity() {
+    val db by lazy { FamilyDB(this) }
+    lateinit var noteAdapter: FamilyAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_show_user)
+        setContentView(R.layout.activity_show_family)
         setupListener()
         setupRecyclerView()
     }
-
+    //berfungsi untuk membuat sebuah note status pada button yang ditekan untuk CRUD yang dilaksanakan
+    //ini berhubungan dengan Constant status pada room
+    //cara panggil id dengan memanggil fungsi intetnEdit.
+    //jika pada fungsi interface adapterListener berubah, maka object akan memerah error karena penambahan fungsi.
     private fun setupRecyclerView() {
-        noteAdapter = ShowUserAdapter(arrayListOf(), object :
-            ShowUserAdapter.OnAdapterListener{
-            override fun onClick(note: User) {
-                Toast.makeText(applicationContext, note.username, Toast.LENGTH_SHORT).show()
+        noteAdapter = FamilyAdapter(arrayListOf(), object :
+            FamilyAdapter.OnAdapterListener{
+            override fun onClick(note: Family) {
+                Toast.makeText(applicationContext, note.name, Toast.LENGTH_SHORT).show()
                 intentEdit(note.id,Constant.TYPE_READ)
             }
-            override fun onUpdate(note: User) {
+            override fun onUpdate(note: Family) {
                 intentEdit(note.id, Constant.TYPE_UPDATE)
             }
-            override fun onDelete(note: User) {
+            override fun onDelete(note: Family) {
                 deleteDialog(note)
             }
         })
@@ -47,11 +49,11 @@ class ShowUser : AppCompatActivity() {
             adapter = noteAdapter
         }
     }
-    private fun deleteDialog(note: User){
+    private fun deleteDialog(note: Family){
         val alertDialog = AlertDialog.Builder(this)
         alertDialog.apply {
             setTitle("Confirmation")
-            setMessage("Are You Sure to delete this data From ${note.username}?")
+            setMessage("Are You Sure to delete this data From ${note.name}?")
             setNegativeButton("Cancel", DialogInterface.OnClickListener
             { dialogInterface, i ->
                 dialogInterface.dismiss()
@@ -75,26 +77,21 @@ class ShowUser : AppCompatActivity() {
     fun loadData() {
         CoroutineScope(Dispatchers.IO).launch {
             val notes = db.noteDao().getNotes()
-            Log.d("ShowUser","dbResponse: $notes")
+            Log.d("ShowFamily","dbResponse: $notes")
             withContext(Dispatchers.Main){
                 noteAdapter.setData(notes)
             }
         }
     }
     fun setupListener() {
-        val btnRegister = findViewById<Button>(R.id.btnRegister)
         button_create.setOnClickListener{
             intentEdit(0, Constant.TYPE_CREATE)
-        }
-        btnRegister.setOnClickListener{
-            val intent = Intent(this,ShowFamily::class.java)
-            startActivity(intent)
         }
     }
     //pick data dari Id yang sebagai primary key
     fun intentEdit(noteId : Int, intentType: Int){
         startActivity(
-            Intent(applicationContext, EditActivity::class.java)
+            Intent(applicationContext, EditFamily::class.java)
                 .putExtra("intent_id", noteId)
                 .putExtra("intent_type", intentType)
         )
