@@ -15,8 +15,21 @@ import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.graphics.Color
+import android.os.Build
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import com.example.login.databinding.ActivityMainBinding
 
 class Register : AppCompatActivity() {
+    private val CHANNEL_ID_1 = "channel_notification_01"
+    private val CHANNEL_ID_2 = "channel_notification_02"
+    private val notificationId2 = 102
+
     private lateinit var binding: ActivityRegisterBinding
     val db by lazy { UserDB(this) }
     private lateinit var username : TextInputEditText
@@ -39,6 +52,7 @@ class Register : AppCompatActivity() {
             mBundle.putString("username", username.text.toString())
             mBundle.putString("password", password.text.toString())
             intent.putExtra("register", mBundle)
+            createNotificationChannel()
 
             if (username.text.toString().length == 0) {
                 CoroutineScope(Dispatchers.IO).launch {
@@ -64,70 +78,41 @@ class Register : AppCompatActivity() {
                 finish()
             }
 
+            sendNotification2()
+
             startActivity(intent)
-        }
+            }
         }
 
-//        btnRegister.setOnClickListener{
-//            val intent = Intent(this, MainActivity::class.java)
-//            val mBundle = Bundle()
-//            mBundle.putString("username",username.text.toString())
-//            mBundle.putString("password",password.text.toString())
-//            intent.putExtra("register", mBundle)
-//
-//            if(username.text.toString().length == 0){
-//                CoroutineScope(Dispatchers.IO).launch {
-//                    db.noteDao().addNote(
-//                        User(1, "a",
-//                            "a")
-//                    )
-//                    finish()
-//                }
-//
-//                startActivity(intent)
-//            }
-//
-//            CoroutineScope(Dispatchers.IO).launch {
-//                db.noteDao().addNote(
-//                    User((Math.random() * (10000 - 3 + 1)).toInt(), username.text.toString(),
-//                        password.text.toString())
-//                )
-//                finish()
-//            }
-//
-//            startActivity(intent)
-//        }
-//        }
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Notification Title"
+            val descriptionText = "Notification Description"
 
-//        btnRegister.setOnClickListener{
-//            val intent = Intent(this, MainActivity::class.java)
-//            val mBundle = Bundle()
-//            mBundle.putString("username",username.text.toString())
-//            mBundle.putString("password",password.text.toString())
-//            intent.putExtra("register", mBundle)
-//
-//            if(username.text.toString().length == 0){
-//                CoroutineScope(Dispatchers.IO).launch {
-//                    db.noteDao().addNote(
-//                        User(1, "a",
-//                            "a")
-//                    )
-//                    finish()
-//                }
-//
-//                startActivity(intent)
-//            }
-//
-//            CoroutineScope(Dispatchers.IO).launch {
-//                db.noteDao().addNote(
-//                    User((Math.random() * (10000 - 3 + 1)).toInt(), username.text.toString(),
-//                        password.text.toString())
-//                )
-//                finish()
-//            }
-//
-//            startActivity(intent)
-//        }
-//
-//    }
+            val channel1 = NotificationChannel(CHANNEL_ID_1, name, NotificationManager.IMPORTANCE_DEFAULT).apply {
+                description = descriptionText
+            }
+
+            val channel2 = NotificationChannel(CHANNEL_ID_2, name, NotificationManager.IMPORTANCE_DEFAULT).apply {
+                description = descriptionText
+            }
+
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel1)
+            notificationManager.createNotificationChannel(channel2)
+        }
+    }
+
+    private fun sendNotification2() {
+        val builder = NotificationCompat.Builder(this, CHANNEL_ID_1)
+            .setSmallIcon(R.drawable.ic_baseline_supervised_user_circle_24)
+            .setContentTitle(binding?.etUsername?.text.toString())
+            .setContentText(binding?.etPassword?.text.toString())
+            .setPriority(NotificationCompat.PRIORITY_LOW)
+
+        with(NotificationManagerCompat.from(this)) {
+            notify(notificationId2, builder.build())
+        }
+    }
 }
