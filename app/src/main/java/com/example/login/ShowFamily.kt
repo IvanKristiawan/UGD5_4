@@ -1,12 +1,18 @@
 package com.example.login
 
 import android.app.AlertDialog
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.login.family.Constant
 import com.example.login.family.Family
@@ -16,6 +22,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import com.example.login.user.User
+import com.example.login.user.UserDB
+import kotlinx.android.synthetic.main.activity_edit.*
+import kotlinx.coroutines.launch
 
 class ShowFamily : AppCompatActivity() {
     val db by lazy { FamilyDB(this) }

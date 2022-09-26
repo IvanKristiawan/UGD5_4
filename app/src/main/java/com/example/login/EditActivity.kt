@@ -1,9 +1,16 @@
 package com.example.login
 
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.example.login.user.Constant
 import com.example.login.user.User
 import com.example.login.user.UserDB
@@ -13,6 +20,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class EditActivity : AppCompatActivity() {
+    private val CHANNEL_ID_1 = "channel_notification_01"
+    private val CHANNEL_ID_2 = "channel_notification_02"
+    private val notificationId2 = 102
     val db by lazy { UserDB(this) }
     private var noteId: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +52,7 @@ class EditActivity : AppCompatActivity() {
         }
     }
     private fun setupListener() {
+        createNotificationChannel()
         button_save.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 db.noteDao().addNote(
@@ -59,6 +70,7 @@ class EditActivity : AppCompatActivity() {
                 )
                 finish()
             }
+            sendNotification3()
         }
     }
     fun getNote() {
@@ -72,5 +84,39 @@ class EditActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return super.onSupportNavigateUp()
+    }
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Notification Title"
+            val descriptionText = "Notification Description"
+
+            val channel1 = NotificationChannel(CHANNEL_ID_1, name, NotificationManager.IMPORTANCE_DEFAULT).apply {
+                description = descriptionText
+            }
+
+            val channel2 = NotificationChannel(CHANNEL_ID_2, name, NotificationManager.IMPORTANCE_DEFAULT).apply {
+                description = descriptionText
+            }
+
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel1)
+            notificationManager.createNotificationChannel(channel2)
+        }
+    }
+    private fun sendNotification3() {
+        val builder = NotificationCompat.Builder(this, CHANNEL_ID_1)
+            .setSmallIcon(R.drawable.ic_baseline_supervised_user_circle_24)
+            .setContentTitle("User Changed!")
+//            .setContentText(binding?.etPassword?.text.toString())
+            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .setStyle(NotificationCompat.InboxStyle()
+                .addLine("str1")
+                .addLine("str2")
+                .setSummaryText("+3 more"))
+
+        with(NotificationManagerCompat.from(this)) {
+            notify(notificationId2, builder.build())
+        }
     }
 }
