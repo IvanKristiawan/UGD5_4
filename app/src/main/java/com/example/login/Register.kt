@@ -19,6 +19,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
 import androidx.core.app.NotificationCompat
@@ -105,10 +106,17 @@ class Register : AppCompatActivity() {
     }
 
     private fun sendNotification2() {
+
+        val picture = BitmapFactory.decodeResource(resources, R.drawable.login)
+
         val builder = NotificationCompat.Builder(this, CHANNEL_ID_1)
             .setSmallIcon(R.drawable.ic_baseline_supervised_user_circle_24)
             .setContentTitle(binding?.etUsername?.text.toString())
             .setContentText(binding?.etPassword?.text.toString())
+            .setLargeIcon(picture)
+            .setStyle(NotificationCompat.BigPictureStyle()
+                .bigLargeIcon(null)
+                .bigPicture((picture)))
             .setPriority(NotificationCompat.PRIORITY_LOW)
 
         with(NotificationManagerCompat.from(this)) {
