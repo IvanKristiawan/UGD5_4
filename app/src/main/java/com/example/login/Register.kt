@@ -115,14 +115,15 @@ class Register : AppCompatActivity() {
 
         val builder = NotificationCompat.Builder(this, CHANNEL_ID_1)
             .setSmallIcon(R.drawable.ic_baseline_supervised_user_circle_24)
-            .setContentTitle(binding?.etUsername?.text.toString())
-            .setContentText(binding?.etPassword?.text.toString())
+            .setContentTitle("Register Berhasil!")
+            .setContentText(binding?.etUsername?.text.toString())
             .setLargeIcon(picture)
+            .setColor(Color.BLUE)
             .addAction(R.drawable.ic_baseline_supervised_user_circle_24, "Yes", YesPendingIntent)
             .setStyle(NotificationCompat.BigPictureStyle()
                 .bigLargeIcon(null)
                 .bigPicture((picture)))
-            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
         with(NotificationManagerCompat.from(this)) {
             notify(notificationId2, builder.build())

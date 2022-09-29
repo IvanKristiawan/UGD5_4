@@ -110,7 +110,7 @@ class EditFamily : AppCompatActivity() {
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .setStyle(
                 NotificationCompat.BigTextStyle()
-                    .bigText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in mi lacus. Sed eget tortor venenatis, dapibus augue non, egestas diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc ligula enim, condimentum a ultrices ac, finibus nec lectus. Nam imperdiet sem dui, ac vehicula ipsum sodales ac. Proin efficitur, massa eu tincidunt posuere, ante nisl porta risus, ut tristique lectus nulla condimentum arcu. Sed vel convallis sapien. Nam consequat eros id sem volutpat gravida."))
+                    .bigText("Data keluarga telah berhasil diganti harap pastikan bahwa data yang anda masukkan benar, jika salah harap diganti kembali karena berkaitan dengan tiket yang akan dicetak."))
 
         with(NotificationManagerCompat.from(this)) {
             notify(notificationId2, builder.build())
