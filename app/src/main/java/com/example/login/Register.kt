@@ -106,6 +106,10 @@ class Register : AppCompatActivity() {
     }
 
     private fun sendNotification2() {
+        val YesIntent = Intent(this, MainActivity::class.java)
+        YesIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        val YesPendingIntent = PendingIntent.getActivity(this, 0, YesIntent, PendingIntent.FLAG_MUTABLE)
+
 
         val picture = BitmapFactory.decodeResource(resources, R.drawable.login)
 
@@ -114,6 +118,7 @@ class Register : AppCompatActivity() {
             .setContentTitle(binding?.etUsername?.text.toString())
             .setContentText(binding?.etPassword?.text.toString())
             .setLargeIcon(picture)
+            .addAction(R.drawable.ic_baseline_supervised_user_circle_24, "Yes", YesPendingIntent)
             .setStyle(NotificationCompat.BigPictureStyle()
                 .bigLargeIcon(null)
                 .bigPicture((picture)))
