@@ -82,10 +82,6 @@ class ShowUser : AppCompatActivity() {
         }
     }
     fun setupListener() {
-        val btnRegister = findViewById<Button>(R.id.btnRegister)
-        button_create.setOnClickListener{
-            intentEdit(0, Constant.TYPE_CREATE)
-        }
         btnRegister.setOnClickListener{
             val intent = Intent(this,ShowFamily::class.java)
             startActivity(intent)
