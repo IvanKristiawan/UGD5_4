@@ -19,6 +19,16 @@
       },
       "name": "Nyasar",
       "vicinity": "Ndak tau dimana ini"
+    },
+    {
+      "geometry": {
+        "location": {
+          "lat": -7,
+          "lng": 110
+        }
+      },
+      "name": "Cabang 2",
+      "vicinity": "Cabang 2"
     }
   ],
   "status": "OK"

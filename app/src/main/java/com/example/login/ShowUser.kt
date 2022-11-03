@@ -24,8 +24,13 @@ class ShowUser : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_user)
+        val btnCamera = findViewById<Button>(R.id.btnCamera)
         setupListener()
         setupRecyclerView()
+        btnCamera.setOnClickListener{
+            val intent = Intent(this,ShowCamera::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setupRecyclerView() {
