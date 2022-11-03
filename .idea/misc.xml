@@ -26,10 +26,23 @@
         <entry key="..\:/TUGAS BESAR PBP/LoginRegisterKotlinTemplate/app/src/main/res/layout/rv_item_riwayat.xml" value="0.33" />
         <entry key="..\:/TUGAS BESAR PBP/LoginRegisterKotlinTemplate/app/src/main/res/layout/rv_item_travel.xml" value="0.25" />
         <entry key="..\:/TUGAS BESAR PBP/LoginRegisterKotlinTemplate/app/src/main/res/menu/home_menu.xml" value="0.1328125" />
+        <entry key="..\:/TUGAS BESAR PBP/UGD5_4/app/src/main/res/drawable/bg_circle.xml" value="0.1" />
+        <entry key="..\:/TUGAS BESAR PBP/UGD5_4/app/src/main/res/drawable/bg_rounded_rect.xml" value="0.1" />
+        <entry key="..\:/TUGAS BESAR PBP/UGD5_4/app/src/main/res/drawable/bg_triangle.xml" value="0.1" />
         <entry key="..\:/TUGAS BESAR PBP/UGD5_4/app/src/main/res/layout/activity_edit_family.xml" value="0.20416666666666666" />
         <entry key="..\:/TUGAS BESAR PBP/UGD5_4/app/src/main/res/layout/activity_family_adapter.xml" value="0.20416666666666666" />
+        <entry key="..\:/TUGAS BESAR PBP/UGD5_4/app/src/main/res/layout/activity_home.xml" value="0.20416666666666666" />
+        <entry key="..\:/TUGAS BESAR PBP/UGD5_4/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/TUGAS BESAR PBP/UGD5_4/app/src/main/res/layout/activity_show_family.xml" value="0.20416666666666666" />
         <entry key="..\:/TUGAS BESAR PBP/UGD5_4/app/src/main/res/layout/activity_show_user.xml" value="0.20416666666666666" />
+        <entry key="..\:/TUGAS BESAR PBP/UGD5_4/app/src/main/res/layout/activity_show_user_adapter.xml" value="0.20416666666666666" />
+        <entry key="..\:/TUGAS BESAR PBP/UGD5_4/app/src/main/res/layout/activity_splash_screen.xml" value="0.20416666666666666" />
+        <entry key="..\:/TUGAS BESAR PBP/UGD5_4/app/src/main/res/layout/fragment_riwayat.xml" value="0.20416666666666666" />
+        <entry key="..\:/TUGAS BESAR PBP/UGD5_4/app/src/main/res/layout/fragment_travel.xml" value="0.20416666666666666" />
+        <entry key="..\:/TUGAS BESAR PBP/UGD5_4/app/src/main/res/layout/layout_tooltip.xml" value="0.1" />
+        <entry key="..\:/TUGAS BESAR PBP/UGD5_4/app/src/main/res/layout/location_view.xml" value="0.1" />
+        <entry key="..\:/TUGAS BESAR PBP/UGD5_4/app/src/main/res/layout/rv_item_riwayat.xml" value="0.20416666666666666" />
+        <entry key="..\:/TUGAS BESAR PBP/UGD5_4/app/src/main/res/layout/rv_item_travel.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>

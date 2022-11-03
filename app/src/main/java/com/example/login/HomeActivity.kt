@@ -19,7 +19,8 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        val btnRegister = findViewById<Button>(R.id.btnRegister)
+//        val btnRegister = findViewById<Button>(R.id.btnRegister)
+        val btnLocation = findViewById<Button>(R.id.btnLocation)
         loadFragment(FragmentTravel())
         bottomNav = findViewById(R.id.bottomNav) as BottomNavigationView
         bottomNav.setOnNavigationItemReselectedListener {
@@ -38,8 +39,12 @@ class HomeActivity : AppCompatActivity() {
                 }
             }
         }
-        btnRegister.setOnClickListener{
-            val intent = Intent(this,ShowUser::class.java)
+//        btnRegister.setOnClickListener{
+//            val intent = Intent(this,ShowUser::class.java)
+//            startActivity(intent)
+//        }
+        btnLocation.setOnClickListener{
+            val intent = Intent(this,ShowLocation::class.java)
             startActivity(intent)
         }
     }
